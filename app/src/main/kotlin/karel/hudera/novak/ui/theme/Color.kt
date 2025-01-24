@@ -1,4 +1,4 @@
-package karel.hudera.elonews.ui.theme
+package karel.hudera.novak.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

@@ -1,4 +1,4 @@
-package karel.hudera.elonews
+package karel.hudera.novak
 
 import org.junit.Test
 

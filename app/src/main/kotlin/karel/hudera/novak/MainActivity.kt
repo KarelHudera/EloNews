@@ -1,4 +1,4 @@
-package karel.hudera.elonews
+package karel.hudera.novak
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,15 +11,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import karel.hudera.elonews.ui.theme.EloNewsTheme
+import karel.hudera.novak.ui.theme.NovaKTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            EloNewsTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+            NovaKTheme {
+                Scaffold( modifier = Modifier.fillMaxSize() ) { innerPadding ->
                     Greeting(
                         name = "Android",
                         modifier = Modifier.padding(innerPadding)
@@ -41,7 +41,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    EloNewsTheme {
+    NovaKTheme {
         Greeting("Android")
     }
 }

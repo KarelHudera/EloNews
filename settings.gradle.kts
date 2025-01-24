@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "EloNews"
+rootProject.name = "NovaK"
 include(":app")
  

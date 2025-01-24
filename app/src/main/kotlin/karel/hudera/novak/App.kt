@@ -1,4 +1,4 @@
-package karel.hudera.elonews
+package karel.hudera.novak
 
 import android.app.Application
 import org.koin.android.ext.koin.androidContext

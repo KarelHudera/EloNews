@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlinAndroidKsp)
+    alias(libs.plugins.hiltAndroid)
 }
 
 android {
@@ -20,7 +22,7 @@ android {
 
     buildTypes {
         release {
-            // Caution! In production, you need to enable ProGuard to obfuscate your code
+            // Set to true in production to obfuscate the code.
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -57,6 +59,9 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    //Splash Api
+    implementation(libs.androidx.core.splashscreen)
+
     //K-tor
     implementation(libs.ktor.client.android)
     implementation(libs.ktor.client.core)
@@ -69,4 +74,15 @@ dependencies {
 
     //di
     implementation(libs.koin.android)
+
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.hilt.android)
+
+    //Datastore
+    implementation(libs.androidx.datastore.preferences)
+
+    implementation(libs.androidx.hilt.navigation.compose)
+
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
 }

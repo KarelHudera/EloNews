@@ -1,9 +1,10 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.kotlinAndroidKsp)
-    alias(libs.plugins.hiltAndroid)
+    alias(libs.plugins.android.application) // Android application plugin
+    alias(libs.plugins.kotlin.android) // Kotlin support for Android
+    alias(libs.plugins.kotlin.compose) // Jetpack Compose support
+    alias(libs.plugins.kotlin.ksp) // Kotlin Symbol Processing (KSP) for annotation processing
+    alias(libs.plugins.hilt.android) // Hilt for Dependency Injection
+    alias(libs.plugins.kotlinx.serialization) // Kotlin Serialization
 }
 
 android {
@@ -43,46 +44,60 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
+    // Core AndroidX dependencies
+    implementation(libs.androidx.core)
+    implementation(libs.androidx.lifecycle)
+    implementation(libs.androidx.activity)
 
-    //Splash Api
+    // Jetpack Compose
+    implementation(platform(libs.androidx.compose.bom)) // BOM for Compose versions
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.ui.graphics)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.compose.material3) // Material 3
+
+    // Navigation
+    implementation(libs.androidx.navigation)
+
+    // Dependency Injection (Hilt)
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation)
+    ksp(libs.hilt.compiler) // KSP compiler for Hilt
+
+    // Splash Screen API
     implementation(libs.androidx.core.splashscreen)
 
-    //K-tor
-    implementation(libs.ktor.client.android)
-    implementation(libs.ktor.client.core)
-    implementation(libs.ktor.client.serialization.jvm)
-    implementation(libs.ktor.client.logging)
-
-    //Coroutines
+    // Kotlin Coroutines
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
 
-    //di
-    implementation(libs.koin.android)
+    // DataStore (for local storage)
+    implementation(libs.androidx.datastore)
 
-    implementation(libs.androidx.navigation.compose)
-    implementation(libs.hilt.android)
+    // Networking (Retrofit + Logging)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
 
-    //Datastore
-    implementation(libs.androidx.datastore.preferences)
+    // Kotlin Serialization library for converting JSON data into Kotlin objects
+    implementation(libs.kotlinx.serialization.json)
 
-    implementation(libs.androidx.hilt.navigation.compose)
+    // Paging (for infinite scrolling)
+    implementation(libs.androidx.paging.runtime)
+    implementation(libs.androidx.paging.compose)
 
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.compiler)
+    // Image Loading (Coil for Compose)
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
+
+    // Testing dependencies
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.compose.ui.test)
+
+    // Debugging tools
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
 }

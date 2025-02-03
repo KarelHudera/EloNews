@@ -15,8 +15,7 @@ import karel.hudera.novak.domain.usecases.app_entry.ReadAppEntry
 import karel.hudera.novak.domain.usecases.app_entry.SaveAppEntry
 import karel.hudera.novak.domain.usecases.news.GetNews
 import karel.hudera.novak.domain.usecases.news.NewsUseCases
-import karel.hudera.novak.domain.usecases.news.SearchNews
-import karel.hudera.novak.util.Constants.SECONDARY_NEWS_API_BASE_URL
+import karel.hudera.novak.util.Constants.PRIMARY_NEWS_API_BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -50,15 +49,15 @@ object AppModule {
             level = HttpLoggingInterceptor.Level.BODY // Logs request and response body
         }
 
-        // Build OkHttpClient with the interceptor
+        // Build OkHttpClient with the loggingInterceptor
         val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor) // Add the interceptor
+            .addInterceptor(loggingInterceptor)
             .build()
 
         return Retrofit
             .Builder()
-            .client(okHttpClient) // Use OkHttpClient
-            .baseUrl(SECONDARY_NEWS_API_BASE_URL)
+            .client(okHttpClient)
+            .baseUrl(PRIMARY_NEWS_API_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(NewsApi::class.java)
@@ -79,7 +78,6 @@ object AppModule {
     ): NewsUseCases {
         return NewsUseCases(
             getNews = GetNews(newsRepository),
-            searchNews = SearchNews(newsRepository)
         )
     }
 }

@@ -6,7 +6,7 @@ object Constants {
     const val APP_ENTRY = "app_entry"
 
     // News APIs
-    const val PRIMARY_NEWS_API_BASE_URL = "https://newsdata.io/api/1/"
-    const val SECONDARY_NEWS_API_BASE_URL = "https://newsapi.org/v2/"
+    const val PRIMARY_NEWS_API_BASE_URL = "https://newsapi.org/v2/"
+    //const val SECONDARY_NEWS_API_BASE_URL = "https://newsdata.io/api/1/"
 }
 

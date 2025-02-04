@@ -3,18 +3,19 @@ package karel.hudera.novak.data.remote
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import karel.hudera.novak.data.remote.dto.primary.ApiArticle
+import karel.hudera.novak.domain.model.Article
+import karel.hudera.novak.domain.model.toArticle
 
 class NewsPagingSource(
     private val newsApi: NewsApi,
     private val sources: String
-) : PagingSource<Int, ApiArticle>() {
+) : PagingSource<Int, Article>() {
 
     // Used for debugging or logging purposes.
     private val TAG = NewsPagingSource::class.java.simpleName
 
     // Simplified getRefreshKey for better readability and reliability
-    override fun getRefreshKey(state: PagingState<Int, ApiArticle>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, Article>): Int? {
         // Refresh key should be based on the anchor position. If there is a next or previous page, it gives better context.
         return state.anchorPosition?.let { anchorPosition ->
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
@@ -24,15 +25,16 @@ class NewsPagingSource(
 
     private var totalNewsCount = 0
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ApiArticle> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Article> {
         val page = params.key ?: 1 // Default to page 1 if no key is provided.
         return try {
 
             // Call the API and get the response.
             val newsResponse = newsApi.getNews(sources = sources, pageNumber = page)
 
-            // Remove duplicates using distinctBy to ensure data integrity.
-            val articles = newsResponse.articles.distinctBy { it.title }
+            val articles = newsResponse.articles
+                .distinctBy { it.title } // Remove duplicates
+                .map { it.toArticle() } // Map ApiArticle to Article.
 
             // Log the current articles for debugging purposes.
             Log.d(TAG, "Loaded ${articles.size} articles for page $page")

@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 class NewsRepositoryImpl(
     private val newsApi: NewsApi
 ) : NewsRepository {
-    override fun getNews(sources: List<String>): Flow<PagingData<Article>> {
+    override suspend fun getNews(sources: List<String>): Flow<PagingData<Article>> {
         return Pager(
             config = PagingConfig(pageSize = 10),
             pagingSourceFactory = {

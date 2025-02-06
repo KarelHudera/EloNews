@@ -1,8 +1,12 @@
 package karel.hudera.novak.di
 
 import android.app.Application
+import coil3.ImageLoader
+import coil3.network.okhttp.OkHttpNetworkFetcherFactory
+import coil3.request.crossfade
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import karel.hudera.novak.data.manager.LocalUserMangerImpl
@@ -43,6 +47,17 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideOkHttpClient(): OkHttpClient {
+        val loggingInterceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY // Logs request and response body
+        }
+        return OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .build()
+    }
+
+    @Provides
+    @Singleton
     fun provideApiInstance(): NewsApi {
 
         val loggingInterceptor = HttpLoggingInterceptor().apply {
@@ -79,5 +94,22 @@ object AppModule {
         return NewsUseCases(
             getNews = GetNews(newsRepository),
         )
+    }
+
+    @Provides
+    @Singleton
+    fun provideImageLoader(application: Application, okHttpClient: OkHttpClient): ImageLoader {
+        return ImageLoader.Builder(application)
+            .crossfade(true)
+            .components {
+                add(OkHttpNetworkFetcherFactory(callFactory = { okHttpClient }))
+            }
+            .build()
+    }
+
+    @EntryPoint
+    @InstallIn(SingletonComponent::class)
+    interface ImageLoaderEntryPoint {
+        fun imageLoader(): ImageLoader
     }
 }

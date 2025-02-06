@@ -1,4 +1,4 @@
-package karel.hudera.novak.ui.theme
+package karel.hudera.novak.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

@@ -48,6 +48,7 @@ dependencies {
     implementation(libs.androidx.core)
     implementation(libs.androidx.lifecycle)
     implementation(libs.androidx.activity)
+    implementation(libs.androidx.appcompat)
 
     // Jetpack Compose
     implementation(platform(libs.androidx.compose.bom)) // BOM for Compose versions

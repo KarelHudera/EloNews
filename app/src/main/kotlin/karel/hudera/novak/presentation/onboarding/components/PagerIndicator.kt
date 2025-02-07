@@ -25,7 +25,7 @@ fun PagerIndicator(
         repeat(times = pagesSize) { page ->
             Box(
                 modifier = Modifier
-                    .size(16.dp)
+                    .size(12.dp)
                     .clip(CircleShape)
                     .background(color = if (page == selectedPage) selectedColor else unselectedColor)
             )

@@ -21,6 +21,7 @@ import karel.hudera.novak.domain.usecases.news.GetNews
 import karel.hudera.novak.domain.usecases.news.NewsUseCases
 import karel.hudera.novak.util.Constants.PRIMARY_NEWS_API_BASE_URL
 import okhttp3.OkHttpClient
+import okhttp3.Protocol
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -51,7 +52,15 @@ object AppModule {
         val loggingInterceptor = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY // Logs request and response body
         }
+
         return OkHttpClient.Builder()
+            .protocols(
+                listOf(
+                    Protocol.HTTP_1_1,
+                    Protocol.HTTP_2,
+                    Protocol.HTTP_3
+                )
+            )
             .addInterceptor(loggingInterceptor)
             .build()
     }

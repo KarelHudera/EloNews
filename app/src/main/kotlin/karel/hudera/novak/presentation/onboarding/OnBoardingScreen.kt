@@ -67,7 +67,7 @@ fun OnBoardingScreen(
                 PagerIndicator(
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally)
-                        .width(60.dp),
+                        .width(52.dp),
                     pagesSize = viewModel.pages.size,
                     selectedPage = currentPage
                 )

@@ -3,6 +3,7 @@ package karel.hudera.novak.presentation.home.components
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -32,6 +33,7 @@ import dagger.hilt.android.EntryPointAccessors
 import karel.hudera.novak.R
 import karel.hudera.novak.di.AppModule
 import karel.hudera.novak.domain.model.Article
+import karel.hudera.novak.presentation.common.shimmerEffect
 import karel.hudera.novak.presentation.theme.NovaKTheme
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -144,4 +146,52 @@ fun rememberImageLoader(): ImageLoader {
         EntryPointAccessors.fromApplication(context, AppModule.ImageLoaderEntryPoint::class.java)
             .imageLoader()
     }
+}
+
+@Composable
+fun ArticleCardShimmerEffect(modifier: Modifier = Modifier) {
+    Row(
+        modifier = modifier
+    ) {
+        Box(
+            modifier = Modifier
+                .size(COLUMN_HEIGHT)
+                .clip(MaterialTheme.shapes.medium)
+                .shimmerEffect()
+        )
+        Column(
+            verticalArrangement = Arrangement.SpaceAround,
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .height(COLUMN_HEIGHT)
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(8.dp))
+                    .height(26.dp)
+                    .shimmerEffect()
+            )
+            Spacer(Modifier.size(4.dp))
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(8.dp))
+                    .height(26.dp)
+                    .shimmerEffect()
+            )
+            Spacer(modifier = Modifier.weight(1f)) // Takes up remaining space
+
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth(0.4f)
+                    .clip(RoundedCornerShape(8.dp))
+                    .height(12.dp)
+                    .shimmerEffect()
+            )
+
+
+        }
+    }
+    HorizontalDivider(Modifier.padding(horizontal = 16.dp))
 }

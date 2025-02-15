@@ -1,10 +1,11 @@
 plugins {
-    alias(libs.plugins.android.application) // Android application plugin
-    alias(libs.plugins.kotlin.android) // Kotlin support for Android
-    alias(libs.plugins.kotlin.compose) // Jetpack Compose support
-    alias(libs.plugins.kotlin.ksp) // Kotlin Symbol Processing (KSP) for annotation processing
-    alias(libs.plugins.hilt.android) // Hilt for Dependency Injection
-    alias(libs.plugins.kotlinx.serialization) // Kotlin Serialization
+    alias(libs.plugins.android.application) // Applies the Android application plugin, enabling Android app development.
+    alias(libs.plugins.kotlin.android) // Enables Kotlin support for Android projects.
+    alias(libs.plugins.kotlin.compose) // Adds Jetpack Compose support for building modern UI in a declarative way.
+    alias(libs.plugins.kotlin.ksp) // Enables Kotlin Symbol Processing (KSP) for faster and more efficient annotation processing.
+    alias(libs.plugins.hilt.android) // Integrates Hilt for Dependency Injection, simplifying DI in Android applications.
+    alias(libs.plugins.kotlinx.serialization) // Adds Kotlin Serialization support for handling JSON and other data formats.
+    alias(libs.plugins.kotlin.parcelize) // Enables `@Parcelize` for automatically generating Parcelable implementations in Kotlin.
 }
 
 android {
@@ -56,6 +57,9 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3) // Material 3
+
+    // Compose icons (https://feathericons.com/)
+    implementation(libs.icons.feather)
 
     // Navigation
     implementation(libs.androidx.navigation)

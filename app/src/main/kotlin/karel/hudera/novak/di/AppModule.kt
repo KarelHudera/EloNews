@@ -11,7 +11,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import karel.hudera.novak.data.manager.LocalUserMangerImpl
 import karel.hudera.novak.data.remote.NewsApi
-import karel.hudera.novak.data.repository.NewsRepositoryImpl
+import karel.hudera.novak.data.NewsRepositoryImpl
 import karel.hudera.novak.domain.manger.LocalUserManger
 import karel.hudera.novak.domain.repository.NewsRepository
 import karel.hudera.novak.domain.usecases.app_entry.AppEntryUseCases

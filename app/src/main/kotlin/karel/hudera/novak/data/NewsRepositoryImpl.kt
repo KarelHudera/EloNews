@@ -1,4 +1,4 @@
-package karel.hudera.novak.data.repository
+package karel.hudera.novak.data
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig

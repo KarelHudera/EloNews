@@ -14,8 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val appEntryUseCases: AppEntryUseCases
-): ViewModel() {
+    appEntryUseCases: AppEntryUseCases
+) : ViewModel() {
 
     private val _splashCondition = mutableStateOf(true)
     val splashCondition: State<Boolean> = _splashCondition
@@ -25,9 +25,9 @@ class MainViewModel @Inject constructor(
 
     init {
         appEntryUseCases.readAppEntry().onEach { shouldStartFromHomeScreen ->
-            if(shouldStartFromHomeScreen){
+            if (shouldStartFromHomeScreen) {
                 _startDestination.value = Route.NewsNavigation.route
-            }else{
+            } else {
                 _startDestination.value = Route.AppStartNavigation.route
             }
             delay(200) //Without this delay, the onBoarding screen will show for a momentum.

@@ -1,4 +1,4 @@
-package karel.hudera.novak.presentation.home.components
+package karel.hudera.novak.presentation.articles.components
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.clickable
@@ -63,6 +63,7 @@ fun ArticleCard(
             imageLoader = imageLoader,
             contentScale = ContentScale.Crop,
             placeholder = painterResource(R.drawable.news),
+            error = painterResource(R.drawable.news),
             modifier = Modifier
                 .size(COLUMN_HEIGHT)
                 .clip(RoundedCornerShape(8.dp))
@@ -180,6 +181,7 @@ fun ArticleCardShimmerEffect(modifier: Modifier = Modifier) {
                     .height(26.dp)
                     .shimmerEffect()
             )
+
             Spacer(modifier = Modifier.weight(1f)) // Takes up remaining space
 
             Box(
@@ -189,8 +191,6 @@ fun ArticleCardShimmerEffect(modifier: Modifier = Modifier) {
                     .height(12.dp)
                     .shimmerEffect()
             )
-
-
         }
     }
     HorizontalDivider(Modifier.padding(horizontal = 16.dp))

@@ -124,7 +124,7 @@ private fun DetailTopBar(
  * @param description Content description for accessibility.
  */
 @Composable
-private fun ActionIconButton(
+fun ActionIconButton(
     onClick: () -> Unit,
     icon: ImageVector,
     description: String

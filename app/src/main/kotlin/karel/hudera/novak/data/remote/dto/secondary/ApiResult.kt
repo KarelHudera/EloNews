@@ -1,7 +1,6 @@
 package karel.hudera.novak.data.remote.dto.secondary
 
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -10,7 +9,6 @@ data class ApiResult(
     val aiRegion: String,
     val aiTag: String,
     val articleId: String,
-
     val category: List<String>,
     val content: String,
     val country: List<String>,

@@ -23,8 +23,8 @@ class ArticlesViewModel @Inject constructor(
     private val _uiState = MutableStateFlow<ArticlesUiState>(ArticlesUiState.Idle)
     val uiState: StateFlow<ArticlesUiState> = _uiState.asStateFlow()
 
-    private val _news = MutableStateFlow<PagingData<Article>>(PagingData.empty())
-    val news: StateFlow<PagingData<Article>> = _news.asStateFlow()
+    private val _articles = MutableStateFlow<PagingData<Article>>(PagingData.empty())
+    val articles: StateFlow<PagingData<Article>> = _articles.asStateFlow()
 
     init {
         fetchArticles()
@@ -36,17 +36,12 @@ class ArticlesViewModel @Inject constructor(
                 sources = listOf( // TODO: Move sources to a repository or data source
                     "bbc-news",
                     "abc-news",
-                    "argaam",
                     "cnn",
-                    "financial-post",
-                    "rt",
-                    "sabq",
-                    "xinhua-net",
-                    "ynet"
+                    "financial-post"
                 )
             ).cachedIn(viewModelScope)
                 .collect { pagingData ->
-                    _news.value = pagingData
+                    _articles.value = pagingData
                 }
         }
     }

@@ -1,6 +1,7 @@
 package karel.hudera.novak.presentation.navigation
 
 import androidx.navigation.NamedNavArgument
+import kotlinx.serialization.Serializable
 
 sealed class Route(
     val route: String,
@@ -14,6 +15,8 @@ sealed class Route(
     data object NewsNavigation : Route(route = "newsNavigation")
 
     data object ArticlesScreen : Route(route = "articlesScreen")
+
+    data object SearchScreen : Route(route = "searchScreen")
 
     data object BookmarkScreen : Route(route = "bookmarkScreen")
 

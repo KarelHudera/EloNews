@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -12,7 +13,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -32,6 +35,7 @@ import compose.icons.feathericons.Globe
 import compose.icons.feathericons.Share2
 import karel.hudera.novak.R
 import karel.hudera.novak.domain.model.Article
+import karel.hudera.novak.presentation.articles.components.formatPublishedDate
 import karel.hudera.novak.presentation.articles.components.rememberImageLoader
 
 @Composable
@@ -52,12 +56,10 @@ fun DetailScreen(
             )
 
         }
-    )
-    { innerPadding ->
+    ) { innerPadding ->
 
         val scrollState = rememberScrollState()
         val imageLoader = rememberImageLoader()
-
 
         Column(
             modifier = Modifier
@@ -73,13 +75,26 @@ fun DetailScreen(
                 placeholder = painterResource(R.drawable.news),
                 modifier = Modifier
                     .fillMaxWidth()
+                    .height(200.dp)
                     .clip(RoundedCornerShape(8.dp))
             )
-
+            Text(
+                text = article.title,
+                style = MaterialTheme.typography.headlineMedium,
+                modifier = Modifier.padding(top = 16.dp)
+            )
+            Text(
+                text = formatPublishedDate(article.date),
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.padding(top = 8.dp)
+            )
+            Text(
+                text = article.content,
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.padding(top = 8.dp)
+            )
         }
-
     }
-
 }
 
 @Composable
@@ -140,7 +155,7 @@ fun ActionIconButton(
 /**
  * Shares the given article URL using available sharing apps.
  */
-private fun shareArticle(context: Context, url: String) {
+fun shareArticle(context: Context, url: String) {
     val intent = Intent(Intent.ACTION_SEND).apply {
         putExtra(Intent.EXTRA_TEXT, url)
         type = "text/plain"
@@ -151,7 +166,7 @@ private fun shareArticle(context: Context, url: String) {
 /**
  * Opens the given URL in a web browser.
  */
-private fun openInBrowser(context: Context, url: String) {
+fun openInBrowser(context: Context, url: String) {
     val intent = Intent(Intent.ACTION_VIEW, url.toUri())
     context.startActivitySafely(intent)
 }
@@ -159,7 +174,7 @@ private fun openInBrowser(context: Context, url: String) {
 /**
  * Starts an activity safely, checking if an app is available to handle the intent.
  */
-private fun Context.startActivitySafely(intent: Intent) {
+fun Context.startActivitySafely(intent: Intent) {
     if (intent.resolveActivity(packageManager) != null) {
         startActivity(intent)
     }

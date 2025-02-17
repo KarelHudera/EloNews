@@ -129,7 +129,7 @@ fun ArticleCardPreview() {
 }
 
 // Helper function to format date
-private fun formatPublishedDate(date: String): String {
+fun formatPublishedDate(date: String): String {
     return try {
         val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
         val outputFormat = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())

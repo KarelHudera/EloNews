@@ -33,7 +33,6 @@ fun NavGraph(
     val navController = rememberNavController()
 
     SharedTransitionLayout {
-
         NavHost(navController = navController, startDestination = startDestination) {
             navigation(
                 route = Route.AppStartNavigation.route,

@@ -26,7 +26,6 @@ class SearchViewModel @Inject constructor(
     private val _articles = MutableStateFlow<PagingData<Article>>(PagingData.empty())
     val articles: StateFlow<PagingData<Article>> = _articles.asStateFlow()
 
-
     private val _searchQuerry = mutableStateOf("")
     val searchQuery: State<String> = _searchQuerry
 

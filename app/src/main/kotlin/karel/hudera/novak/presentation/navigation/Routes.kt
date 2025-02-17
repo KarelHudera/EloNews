@@ -1,8 +1,15 @@
 package karel.hudera.novak.presentation.navigation
 
 import androidx.navigation.NamedNavArgument
-import kotlinx.serialization.Serializable
 
+
+/**
+ * A sealed class representing the different routes in the app's navigation system.
+ *
+ * Each route corresponds to a specific screen or destination within the app. The route's
+ * `route` string is used for navigation, and `arguments` can be added to pass data
+ * between destinations if needed.
+ */
 sealed class Route(
     val route: String,
     val arguments: List<NamedNavArgument> = emptyList()

@@ -10,31 +10,56 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * ViewModel for managing the onboarding flow.
+ *
+ * This ViewModel tracks the user's progress through the onboarding screens and allows
+ * saving the app entry state to indicate that onboarding has been completed.
+ *
+ * @param appEntryUseCases Use case for managing app entry preferences.
+ */
 @HiltViewModel
 class OnBoardingViewModel @Inject constructor(
     private val appEntryUseCases: AppEntryUseCases
 ) : ViewModel() {
 
-    // State: Current page in the onboarding flow
+    /**
+     * The current page in the onboarding flow.
+     *
+     * This state is updated when the user navigates between onboarding screens.
+     */
     private val _currentPage = MutableStateFlow(0)
+
+    /** Publicly exposed state representing the current onboarding page. */
     val currentPage: StateFlow<Int> = _currentPage
 
-    // Constant: Total number of pages
+    /** The list of onboarding pages. */
     val pages = pagesList
 
-    // Save user entry after onboarding is complete
+    /**
+     * Saves the user's onboarding completion state.
+     *
+     * This method marks onboarding as completed, so the user is not shown the onboarding
+     * screens again when reopening the app.
+     */
     fun saveUserEntry() {
         viewModelScope.launch {
             appEntryUseCases.saveAppEntry()
         }
     }
 
-    // Update the current page
+    /**
+     * Updates the current page in the onboarding flow.
+     *
+     * @param page The new page index.
+     */
     fun updatePage(page: Int) {
         _currentPage.value = page
     }
 
-    // Helper to check if it's the last page
+    /**
+     * Indicates whether the user is on the last onboarding page.
+     */
     val isLastPage: Boolean
         get() = _currentPage.value == pages.size - 1
 }

@@ -1,11 +1,11 @@
 package karel.hudera.novak.domain.usecases.app_entry
 
-import karel.hudera.novak.domain.manger.LocalUserManger
+import karel.hudera.novak.domain.manger.LocalUserManager
 
 class SaveAppEntry(
-    private val localUserManger: LocalUserManger
+    private val localUserManager: LocalUserManager
 ) {
     suspend operator fun invoke(){
-        localUserManger.saveAppEntry()
+        localUserManager.saveAppEntry()
     }
 }
